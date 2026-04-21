@@ -9,16 +9,20 @@ import core.basesyntax.model.User;
 import core.basesyntax.service.InvalidAgeException;
 import core.basesyntax.service.InvalidDataLengthException;
 import core.basesyntax.service.NullDataException;
+import core.basesyntax.service.RegistrationService;
+import core.basesyntax.service.RegistrationServiceImpl;
 import core.basesyntax.service.UserExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class RegistrationServiceImplTest {
-    private StorageDaoImpl storageDaoImpl = new StorageDaoImpl();
+    private StorageDaoImpl storageDaoImpl;
+    RegistrationService registrationService;
 
     @BeforeEach
     void setUp() {
         storageDaoImpl = new StorageDaoImpl();
+        registrationService = new RegistrationServiceImpl();
     }
 
     @Test
@@ -27,7 +31,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("firstLogin");
         testUser.setPassword("thePassword");
-        User actual = storageDaoImpl.add(testUser);
+        User actual = registrationService.register(testUser);
         User expected = storageDaoImpl.add(testUser);
         assertEquals(expected, actual);
     }
@@ -38,7 +42,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(18);
         testUser.setLogin("eidgthLogin");
         testUser.setPassword("thePassword");
-        User actual = storageDaoImpl.add(testUser);
+        User actual = registrationService.register(testUser);
         User expected = storageDaoImpl.add(testUser);
         assertEquals(expected, actual);
     }
@@ -50,7 +54,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("secondLogin");
         testUser.setPassword("thePassword");
         assertThrows(InvalidAgeException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -61,7 +65,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("ninethLogin");
         testUser.setPassword("thePassword");
         assertThrows(InvalidAgeException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -72,7 +76,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("thirdLogin");
         testUser.setPassword("thePassword");
         assertThrows(NullDataException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -82,7 +86,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("validLogin");
         testUser.setPassword("thePassword");
-        User actual = storageDaoImpl.add(testUser);
+        User actual = registrationService.register(testUser);
         User expected = storageDaoImpl.add(testUser);
         assertEquals(expected, actual);
     }
@@ -93,7 +97,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("qwdfhj");
         testUser.setPassword("thePassword");
-        User actual = storageDaoImpl.add(testUser);
+        User actual = registrationService.register(testUser);
         User expected = storageDaoImpl.add(testUser);
         assertEquals(expected, actual);
     }
@@ -105,7 +109,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin(null);
         testUser.setPassword("thePassword");
         assertThrows(NullDataException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -116,7 +120,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("");
         testUser.setPassword("thePassword");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -127,7 +131,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("vor");
         testUser.setPassword("thePassword");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -138,7 +142,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("gbmki");
         testUser.setPassword("thePassword");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -149,7 +153,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("shotr");
         testUser.setPassword("thePassword");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -159,7 +163,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("fourthLogin");
         testUser.setPassword("validPassword");
-        User actual = storageDaoImpl.add(testUser);
+        User actual = registrationService.register(testUser);
         User expected = storageDaoImpl.add(testUser);
         assertEquals(expected, actual);
     }
@@ -170,7 +174,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("10thLogin");
         testUser.setPassword("asvkdn");
-        User actual = storageDaoImpl.add(testUser);
+        User actual = registrationService.register(testUser);
         User expected = storageDaoImpl.add(testUser);
         assertEquals(expected, actual);
     }
@@ -182,7 +186,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("fifthLogin");
         testUser.setPassword(null);
         assertThrows(NullDataException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -193,7 +197,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("fifthLogin");
         testUser.setPassword("");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -204,7 +208,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("fifthLogin");
         testUser.setPassword("mdg");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -215,7 +219,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("fifthLogin");
         testUser.setPassword("dolbr");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -226,7 +230,7 @@ class RegistrationServiceImplTest {
         testUser.setLogin("sixthLogin");
         testUser.setPassword("short");
         assertThrows(InvalidDataLengthException.class, () -> {
-            storageDaoImpl.add(testUser);
+            registrationService.register(testUser);
         });
     }
 
@@ -250,23 +254,22 @@ class RegistrationServiceImplTest {
         testUser.setLogin(login);
         testUser.setPassword("thePassword");
         User expected = storageDaoImpl.add(testUser);
-        User actual = storageDaoImpl.get(login);
-        assertEquals(expected, actual);
+        assertEquals(expected, testUser);
     }
 
     @Test
     void register_userAlreadyExist_notOk() {
-        final User testUser = new User();
+        final User newUser = new User();
         final User existedUser = new User();
         existedUser.setAge(20);
         existedUser.setLogin("takenLogin");
         existedUser.setPassword("thePassword");
         Storage.people.add(existedUser);
-        testUser.setAge(20);
-        testUser.setLogin("takenLogin");
-        testUser.setPassword("thePassword");
+        newUser.setAge(20);
+        newUser.setLogin("takenLogin");
+        newUser.setPassword("thePassword");
         assertThrows(UserExistException.class, () -> {
-            Storage.people.add(testUser);
+            registrationService.register(newUser);
         });
     }
 }
