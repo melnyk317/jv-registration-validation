@@ -134,7 +134,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("fifthLogin");
         testUser.setPassword("");
-        assertThrows(NullDataException.class, () -> {
+        assertThrows(InvalidDataLengthException.class, () -> {
             registrationServiceImpl.register(testUser);
         });
     }
@@ -144,7 +144,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("fifthLogin");
         testUser.setPassword("mdg");
-        assertThrows(NullDataException.class, () -> {
+        assertThrows(InvalidDataLengthException.class, () -> {
             registrationServiceImpl.register(testUser);
         });
     }
@@ -154,7 +154,7 @@ class RegistrationServiceImplTest {
         testUser.setAge(20);
         testUser.setLogin("fifthLogin");
         testUser.setPassword("dolbr");
-        assertThrows(NullDataException.class, () -> {
+        assertThrows(InvalidDataLengthException.class, () -> {
             registrationServiceImpl.register(testUser);
         });
     }
