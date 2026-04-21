@@ -9,17 +9,26 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public User register(User user) {
-        if (user.getAge() == null || user.getLogin() == null || user.getPassword() == null) {
-            throw new InvalidData("Your data can`t be null");
+        if (user.getAge() == null) {
+            throw new NullDataException("Your age can`t be null");
+        }
+        if (user.getLogin() == null) {
+            throw new NullDataException("Your login can`t be null");
+        }
+        if (user.getPassword() == null) {
+            throw new NullDataException("Your login can`t be null");
         }
         if (user.getAge() < 18) {
-            throw new InvalidAgeException("User is a minor");
+            throw new InvalidAgeException("Your are too young, or your age is invalid");
         }
-        if (user.getPassword().length() < 6 || user.getLogin().length() < 6) {
-            throw new InvalidDataLength("Your password or your login is too short");
+        if (user.getPassword().length() < 6) {
+            throw new InvalidDataLengthException("Login length must be at least 6");
+        }
+        if (user.getLogin().length() < 6) {
+            throw new InvalidDataLengthException("Password length must be at least 6");
         }
         if (storageDao.get(user.getLogin()) != null) {
-            throw new UserExistExeption("This login is already taken");
+            throw new UserExistException("This login is already taken");
         }
         storageDao.add(user);
         return user;
