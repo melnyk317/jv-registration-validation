@@ -256,7 +256,7 @@ class RegistrationServiceImplTest {
 
     @Test
     void register_userAlreadyExist_notOk() {
-        User testUser = new User();
+        final User testUser = new User();
         final User existedUser = new User();
         existedUser.setAge(20);
         existedUser.setLogin("takenLogin");
