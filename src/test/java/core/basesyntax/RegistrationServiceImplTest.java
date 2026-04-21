@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 class RegistrationServiceImplTest {
     private StorageDaoImpl storageDaoImpl;
-    RegistrationService registrationService;
+    private RegistrationService registrationService;
 
     @BeforeEach
     void setUp() {
