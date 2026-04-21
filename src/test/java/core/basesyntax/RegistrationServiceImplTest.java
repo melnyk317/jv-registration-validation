@@ -2,9 +2,6 @@ package core.basesyntax;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import org.junit.jupiter.api.BeforeEach;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
@@ -14,6 +11,7 @@ import core.basesyntax.service.NullDataException;
 import core.basesyntax.service.InvalidDataLengthException;
 import core.basesyntax.service.RegistrationServiceImpl;
 import core.basesyntax.service.UserExistException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class RegistrationServiceImplTest {
